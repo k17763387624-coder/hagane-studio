@@ -143,3 +143,40 @@ func TestGitCommitFollowsGitdirAndPackedRefs(t *testing.T) {
 		t.Errorf("commit = %q", got)
 	}
 }
+
+func TestMacBundleRulesDoNotDependOnWorkingDirectory(t *testing.T) {
+	root := t.TempDir()
+	executable := filepath.Join(root, "Folder with spaces", "Hagane Works.app", "Contents", "MacOS", "HaganeWorks")
+	resources := filepath.Join(filepath.Dir(filepath.Dir(executable)), "Resources", filepath.FromSlash(Folder))
+	wd := filepath.Join(root, "unrelated working folder")
+	got := candidatePaths("", executable, wd, "darwin")
+	want := []string{
+		filepath.Join(filepath.Dir(executable), filepath.FromSlash(Folder)),
+		resources,
+		filepath.Join(wd, filepath.FromSlash(Folder)),
+	}
+	if !reflect.DeepEqual(got, want) {
+		t.Fatalf("candidates = %v; want %v", got, want)
+	}
+	if err := os.MkdirAll(filepath.Join(resources, "Config"), 0o755); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(resources, filepath.FromSlash(ModifiersFile)), []byte("modifiers = {\n\ta_factor = country\n}\n"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	raw, err := os.ReadFile(filepath.Join(got[1], filepath.FromSlash(ModifiersFile)))
+	if err != nil {
+		t.Fatal(err)
+	}
+	names, _, err := ParseModifiers(raw)
+	if err != nil || !reflect.DeepEqual(names, []string{"a_factor"}) {
+		t.Fatalf("bundled modifiers = %v, %v", names, err)
+	}
+	configured := filepath.Join(root, "custom rules")
+	if got := candidatePaths(configured, executable, wd, "darwin"); got[0] != configured {
+		t.Fatalf("explicit rules do not take precedence: %v", got)
+	}
+	if got := candidatePaths("", executable, wd, "windows"); len(got) != 2 {
+		t.Fatalf("macOS-only rules leaked onto Windows: %v", got)
+	}
+}

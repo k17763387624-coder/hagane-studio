@@ -7,7 +7,7 @@
     "gameDirTitle": "Instalación de Hearts of Iron IV",
     "gameDirHelp": "La vista previa del juego y los datos del juego base se leen de tu propia copia del juego. Este programa no incluye archivos del juego.",
     "gameFound": "{dir} (versión {version})",
-    "gameMissing": "No se encontró automáticamente. Elige la carpeta que contiene hoi4.exe.",
+    "gameMissing": "No se encontró automáticamente. Elige la carpeta de instalación completa del juego.",
     "notChosen": "Aún no elegida",
     "choose": "Elegir…",
     "start": "Empezar"

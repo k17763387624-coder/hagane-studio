@@ -7,7 +7,7 @@
     "gameDirTitle": "Hearts of Iron IV のインストール先",
     "gameDirHelp": "ゲームプレビューと本編データは、お手持ちのゲームから読み込みます。本プログラムにゲームのファイルは含まれていません。",
     "gameFound": "{dir}（バージョン {version}）",
-    "gameMissing": "自動では見つかりませんでした。hoi4.exe があるフォルダを選んでください。",
+    "gameMissing": "自動では見つかりませんでした。ゲーム全体のインストール先フォルダを選んでください。",
     "notChosen": "未選択",
     "choose": "選択…",
     "start": "開始"

@@ -43,6 +43,15 @@
 
 ## 下载与运行
 
+### Mac 移植版
+
+本分支新增基于 Cocoa／WKWebView 的原生 Mac 窗口，支持 macOS 13 或更新版本，可构建
+Apple Silicon 和 Intel 发布包。运行 `bash tools/release-macos.sh --version macos-local` 构建，
+然后双击 **Hagane Works.app**。详见 [Mac 构建、使用和限制](docs/macos.md)。
+本地构建使用临时签名，未经过 Apple 公证，不附带游戏文件。
+
+### Windows
+
 从 [GitHub Releases](https://github.com/hagane-works/hagane-studio/releases) 下载便携 ZIP，完整解压后
 运行 `HaganeWorks.exe`。
 
@@ -95,7 +104,7 @@ Hagane Works 在「文档」等受保护文件夹里保存项目、图片和导�
 
 ### 环境要求
 
-- Windows 10 或 Windows 11
+- Windows 10／11，或安装了 Xcode 命令行工具的 macOS 13+（[Mac 构建说明](docs/macos.md)）
 - [Go](https://go.dev/) 1.25 或更高版本
 - [Node.js](https://nodejs.org/) 20 或更高版本
 - 支持子模块的 Git

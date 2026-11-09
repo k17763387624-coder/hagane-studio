@@ -7,7 +7,7 @@
     "gameDirTitle": "Hearts of Iron IV 설치 폴더",
     "gameDirHelp": "게임 미리보기와 기본 게임 데이터는 직접 설치한 게임에서 읽어 옵니다. 이 프로그램에는 게임 파일이 포함되어 있지 않습니다.",
     "gameFound": "{dir} (버전 {version})",
-    "gameMissing": "자동으로 찾지 못했습니다. hoi4.exe가 있는 폴더를 고르세요.",
+    "gameMissing": "자동으로 찾지 못했습니다. 게임이 완전히 설치된 폴더를 고르세요.",
     "notChosen": "아직 선택하지 않음",
     "choose": "선택…",
     "start": "시작"

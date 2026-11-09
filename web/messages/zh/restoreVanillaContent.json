@@ -15,7 +15,7 @@
   "successBody": "{count} 个州重新完整了 —— 补回了 {navalBases} 个海军基地和 {landmarks} 处地标。",
   "nothingToRestore": "没有可补的内容：这些州已经带着原版的全部内容了。",
   "errorVanillaRootUnconfigured": "还没有设置钢铁雄心 4 安装目录，读不到原版的州文件，所以补不了。这次一行都没改。请在 设置 → 钢铁雄心 4 安装目录 中选择游戏目录。",
-  "errorVanillaStatesDirMissing": "设置里的钢铁雄心 4 目录不是游戏的安装目录 —— history/states 读不到。这次一行都没改。请在 设置 → 钢铁雄心 4 安装目录 中选择包含 hoi4.exe 的文件夹。",
+  "errorVanillaStatesDirMissing": "设置里的钢铁雄心 4 目录不是游戏的安装目录 —— history/states 读不到。这次一行都没改。请在 设置 → 钢铁雄心 4 安装目录 中选择完整的游戏安装目录。",
   "errorVanillaStatesEmpty": "找到了游戏的 history/states 目录，但一个州都读不出来。这次一行都没改。请在 Steam 中验证游戏文件完整性，或在 设置 → 钢铁雄心 4 安装目录 中换一个安装目录。",
   "errorGeneric": "从原版补齐失败，这次一行都没改。可以再试一次。"
 }

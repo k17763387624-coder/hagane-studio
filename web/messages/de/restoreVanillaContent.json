@@ -15,7 +15,7 @@
   "successBody": "{count} Staaten sind wieder vollständig — {navalBases} Marinestützpunkte und {landmarks} Wahrzeichen sind zurück.",
   "nothingToRestore": "Es gibt nichts zurückzuschreiben: Diese Staaten enthalten bereits alles, was das Hauptspiel mitliefert.",
   "errorVanillaRootUnconfigured": "Der Hearts-of-Iron-IV-Ordner ist nicht festgelegt, daher konnten die Staatendateien des Hauptspiels nicht gelesen und nichts wiederhergestellt werden. Es wurde keine einzige Zeile geändert. Wähle den Spielordner unter Einstellungen → Hearts-of-Iron-IV-Installation.",
-  "errorVanillaStatesDirMissing": "Der Hearts-of-Iron-IV-Ordner in den Einstellungen ist nicht der Installationsordner des Spiels — history/states konnte nicht gelesen werden. Es wurde keine einzige Zeile geändert. Wähle unter Einstellungen → Hearts-of-Iron-IV-Installation den Ordner, der hoi4.exe enthält.",
+  "errorVanillaStatesDirMissing": "Der Hearts-of-Iron-IV-Ordner in den Einstellungen ist nicht der Installationsordner des Spiels — history/states konnte nicht gelesen werden. Es wurde keine einzige Zeile geändert. Wähle unter Einstellungen → Hearts-of-Iron-IV-Installation den vollständigen Installationsordner des Spiels.",
   "errorVanillaStatesEmpty": "Der Ordner history/states des Spiels wurde gefunden, aber daraus konnte kein einziger Staat gelesen werden. Es wurde keine einzige Zeile geändert. Überprüfe die Spieldateien in Steam oder wähle eine andere Installation unter Einstellungen → Hearts-of-Iron-IV-Installation.",
   "errorGeneric": "Das Wiederherstellen der Inhalte aus dem Hauptspiel ist fehlgeschlagen, daher wurde keine einzige Zeile geändert. Du kannst es erneut versuchen."
 }

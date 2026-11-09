@@ -7,7 +7,7 @@
     "gameDirTitle": "钢铁雄心 4 安装目录",
     "gameDirHelp": "游戏预览和原版数据都从你自己安装的游戏里读取，本程序不附带任何游戏文件。",
     "gameFound": "{dir}（版本 {version}）",
-    "gameMissing": "没有自动找到。请选择包含 hoi4.exe 的文件夹。",
+    "gameMissing": "没有自动找到。请选择完整的游戏安装目录。",
     "notChosen": "尚未选择",
     "choose": "选择…",
     "start": "开始"

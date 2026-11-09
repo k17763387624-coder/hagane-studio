@@ -252,6 +252,26 @@ func TestUnreachable(t *testing.T) {
 	}
 }
 
+func TestDesktopProgramFindsMacBundleBesideCLI(t *testing.T) {
+	dir := filepath.Join(t.TempDir(), "Hagane macOS")
+	self := filepath.Join(dir, "hw")
+	bundle := filepath.Join(dir, "Hagane Works.app", "Contents", "MacOS", "HaganeWorks")
+	if err := os.MkdirAll(filepath.Dir(bundle), 0o755); err != nil {
+		t.Fatal(err)
+	}
+	writeFile(t, bundle, "app")
+	if got := desktopProgram(self, "darwin"); got != bundle {
+		t.Fatalf("desktop program = %q, want %q", got, bundle)
+	}
+	writeFile(t, filepath.Join(dir, "HaganeWorks"), "loose binary")
+	if got, want := desktopProgram(self, "darwin"), filepath.Join(dir, "HaganeWorks"); got != want {
+		t.Fatalf("loose desktop program = %q, want %q", got, want)
+	}
+	if got, want := desktopProgram(self, "windows"), filepath.Join(dir, "HaganeWorks.exe"); got != want {
+		t.Fatalf("Windows desktop program = %q, want %q", got, want)
+	}
+}
+
 func TestEndToEnd(t *testing.T) {
 	if testing.Short() {
 		t.Skip("builds the program")

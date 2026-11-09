@@ -15,7 +15,7 @@
   "successBody": "{count} states are whole again — {navalBases} naval bases and {landmarks} landmarks came back.",
   "nothingToRestore": "There is nothing to add back: these states already carry everything the base game ships.",
   "errorVanillaRootUnconfigured": "The Hearts of Iron IV folder is not set, so the base game's state files could not be read and nothing was restored. Not one line was changed. Choose the game folder in Settings → Hearts of Iron IV installation.",
-  "errorVanillaStatesDirMissing": "The Hearts of Iron IV folder in Settings is not the game's installation folder — history/states could not be read. Not one line was changed. Choose the folder that contains hoi4.exe in Settings → Hearts of Iron IV installation.",
+  "errorVanillaStatesDirMissing": "The Hearts of Iron IV folder in Settings is not the game's installation folder — history/states could not be read. Not one line was changed. Choose the complete game installation folder in Settings → Hearts of Iron IV installation.",
   "errorVanillaStatesEmpty": "The game's history/states folder was found, but not a single state could be read from it. Not one line was changed. Verify the game files in Steam, or choose another installation in Settings → Hearts of Iron IV installation.",
   "errorGeneric": "Restoring base-game content failed, so not one line was changed. You can try again."
 }

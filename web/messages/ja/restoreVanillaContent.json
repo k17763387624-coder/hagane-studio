@@ -15,7 +15,7 @@
   "successBody": "{count} 件のステートが元どおり揃いました。海軍基地 {navalBases} 件とランドマーク {landmarks} 件が戻っています。",
   "nothingToRestore": "補完できる内容はありません。これらのステートには本体の内容がすべて揃っています。",
   "errorVanillaRootUnconfigured": "Hearts of Iron IV のフォルダーが設定されていないため、本体のステートファイルを読み取れず、何も補完できませんでした。今回は 1 行も変更していません。設定 → Hearts of Iron IV のインストール先 でゲームフォルダーを選択してください。",
-  "errorVanillaStatesDirMissing": "設定の Hearts of Iron IV フォルダーがゲームのインストール先ではありません。history/states を読み取れませんでした。今回は 1 行も変更していません。設定 → Hearts of Iron IV のインストール先 で hoi4.exe があるフォルダーを選択してください。",
+  "errorVanillaStatesDirMissing": "設定の Hearts of Iron IV フォルダーがゲームのインストール先ではありません。history/states を読み取れませんでした。今回は 1 行も変更していません。設定 → Hearts of Iron IV のインストール先 で ゲーム全体のインストール先フォルダーを選択してください。",
   "errorVanillaStatesEmpty": "ゲームの history/states フォルダーは見つかりましたが、そこから 1 件もステートを読み取れませんでした。今回は 1 行も変更していません。Steam でゲームファイルの整合性を確認するか、設定 → Hearts of Iron IV のインストール先 で別のインストール先を選択してください。",
   "errorGeneric": "本体の内容の補完に失敗したため、今回は 1 行も変更していません。もう一度お試しください。"
 }

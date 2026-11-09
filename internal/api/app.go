@@ -83,11 +83,11 @@ func Register(mux *http.ServeMux, deps Deps) {
 }
 
 func (a *app) game() (fs.FS, error) {
-	dir := a.Settings.Get().GameDir
-	if !gamedir.Valid(dir) {
+	install, err := gamedir.Inspect(a.Settings.Get().GameDir)
+	if err != nil {
 		return nil, errNoGameDir
 	}
-	return os.DirFS(dir), nil
+	return os.DirFS(install.Dir), nil
 }
 
 var errNoGameDir = errors.New("set the Hearts of Iron IV folder in settings first")
@@ -186,9 +186,13 @@ func (a *app) updateSettings(w http.ResponseWriter, r *http.Request) {
 		}
 		body.ProjectsDir = &dir
 	}
-	if body.GameDir != nil && !gamedir.Valid(*body.GameDir) {
-		server.Fail(w, http.StatusBadRequest, errors.New("this folder is not a Hearts of Iron IV installation"))
-		return
+	if body.GameDir != nil {
+		install, err := gamedir.Inspect(*body.GameDir)
+		if err != nil {
+			server.Fail(w, http.StatusBadRequest, errors.New("this folder is not a Hearts of Iron IV installation"))
+			return
+		}
+		body.GameDir = &install.Dir
 	}
 	if body.ModDir != nil && *body.ModDir != "" {
 		dir, err := absoluteDir(*body.ModDir, true)

@@ -1,0 +1,49 @@
+name: macOS
+
+on:
+  push:
+    branches: [main, 'macos/**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Install and check frontend
+        run: |
+          npm --prefix web ci
+          npm --prefix web run typecheck
+          npm --prefix web run lint
+          npm --prefix web run lint:tokens
+          npm --prefix web run lint:state-effect
+          npm --prefix web test -- --run
+          npm --prefix web run build
+      - name: Test Go on macOS
+        run: go test -vet=off ./...
+      - name: Verify browser fallback build
+        run: CGO_ENABLED=0 go build -o /tmp/HaganeWorks-no-cgo ./cmd/haganeworks
+      - name: Package Apple Silicon and Intel
+        run: bash tools/release-macos.sh --version "macos-ci-${{ github.run_number }}" --arch all --skip-frontend --skip-checks
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hagane-works-macos
+          path: |
+            dist/release/macos-ci-*/*.zip
+            dist/release/macos-ci-*/SHA256SUMS.txt
+          if-no-files-found: error

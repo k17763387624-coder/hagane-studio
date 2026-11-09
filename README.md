@@ -48,6 +48,15 @@ ready-to-test mod without running a hosted service.
 
 ## Download and run
 
+### macOS fork
+
+This branch adds a native Cocoa/WKWebView application for macOS 13 or newer, with
+Apple Silicon and Intel packages. Build with `bash tools/release-macos.sh --version macos-local`
+and open **Hagane Works.app**. See [macOS setup, packaging and limitations](docs/macos.md).
+Local builds use ad-hoc signing and are not notarized. No game files are included.
+
+### Windows
+
 Download a portable ZIP from [GitHub Releases](https://github.com/hagane-works/hagane-studio/releases),
 extract the entire archive, and run `HaganeWorks.exe`.
 
@@ -104,7 +113,7 @@ More screenshots are available in [`docs/screenshots`](docs/screenshots).
 
 ### Requirements
 
-- Windows 10 or Windows 11
+- Windows 10/11, or macOS 13+ with Xcode Command Line Tools ([macOS instructions](docs/macos.md))
 - [Go](https://go.dev/) 1.25 or newer
 - [Node.js](https://nodejs.org/) 20 or newer
 - Git with submodule support

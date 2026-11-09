@@ -15,7 +15,7 @@
   "successBody": "{count} régions sont de nouveau complètes : {navalBases} bases navales et {landmarks} monuments sont revenus.",
   "nothingToRestore": "Il n’y a rien à réinjecter : ces régions contiennent déjà tout ce que fournit le jeu de base.",
   "errorVanillaRootUnconfigured": "Le dossier de Hearts of Iron IV n’est pas défini : les fichiers des régions du jeu de base n’ont pas pu être lus et rien n’a été restauré. Pas une seule ligne n’a été modifiée. Choisissez le dossier du jeu dans Paramètres → Installation de Hearts of Iron IV.",
-  "errorVanillaStatesDirMissing": "Le dossier de Hearts of Iron IV défini dans les paramètres n’est pas le dossier d’installation du jeu : history/states n’a pas pu être lu. Pas une seule ligne n’a été modifiée. Choisissez le dossier qui contient hoi4.exe dans Paramètres → Installation de Hearts of Iron IV.",
+  "errorVanillaStatesDirMissing": "Le dossier de Hearts of Iron IV défini dans les paramètres n’est pas le dossier d’installation du jeu : history/states n’a pas pu être lu. Pas une seule ligne n’a été modifiée. Choisissez le dossier d’installation complet du jeu dans Paramètres → Installation de Hearts of Iron IV.",
   "errorVanillaStatesEmpty": "Le dossier history/states du jeu a été trouvé, mais aucune région n’a pu y être lue. Pas une seule ligne n’a été modifiée. Vérifiez les fichiers du jeu dans Steam ou choisissez une autre installation dans Paramètres → Installation de Hearts of Iron IV.",
   "errorGeneric": "La restauration du contenu du jeu de base a échoué, aucune ligne n’a donc été modifiée. Vous pouvez réessayer."
 }

@@ -20,6 +20,10 @@ type Install struct {
 }
 
 func Valid(dir string) bool {
+	return dataRoot(dir) != ""
+}
+
+func validDataRoot(dir string) bool {
 	if dir == "" {
 		return false
 	}
@@ -32,18 +36,52 @@ func Valid(dir string) bool {
 	return true
 }
 
-func Inspect(dir string) (Install, error) {
+func dataRoot(dir string) string {
+	if strings.TrimSpace(dir) == "" {
+		return ""
+	}
 	dir = filepath.Clean(dir)
-	if !Valid(dir) {
+	if validDataRoot(dir) {
+		return dir
+	}
+	if !strings.EqualFold(filepath.Ext(dir), ".app") {
+		return ""
+	}
+	if info, err := os.Stat(dir); err != nil || !info.IsDir() {
+		return ""
+	}
+	for _, candidate := range []string{
+		filepath.Join(dir, "Contents", "Resources"),
+		filepath.Join(dir, "Contents", "Resources", "game"),
+		filepath.Join(dir, "Contents", "MacOS"),
+		filepath.Dir(dir),
+	} {
+		if validDataRoot(candidate) {
+			return candidate
+		}
+	}
+	return ""
+}
+
+func Inspect(dir string) (Install, error) {
+	dir = dataRoot(dir)
+	if dir == "" {
 		return Install{}, ErrNotFound
 	}
 	return Install{Dir: dir, Version: readVersion(dir)}, nil
 }
 
 func Find() (Install, error) {
-	for _, library := range steamLibraries() {
-		if install, err := Inspect(filepath.Join(library, "steamapps", "common", steamFolderName)); err == nil {
-			return install, nil
+	return findInLibraries(steamLibraries())
+}
+
+func findInLibraries(libraries []string) (Install, error) {
+	for _, library := range libraries {
+		root := filepath.Join(library, "steamapps", "common", steamFolderName)
+		for _, candidate := range []string{root, filepath.Join(root, "hoi4.app"), filepath.Join(root, steamFolderName+".app")} {
+			if install, err := Inspect(candidate); err == nil {
+				return install, nil
+			}
 		}
 	}
 	return Install{}, ErrNotFound
@@ -64,18 +102,25 @@ func readVersion(dir string) string {
 }
 
 func steamLibraries() []string {
+	return librariesFromRoots(steamRoots())
+}
+
+func librariesFromRoots(roots []string) []string {
 	seen := map[string]bool{}
 	var libraries []string
 	add := func(dir string) {
 		dir = filepath.Clean(dir)
-		key := strings.ToLower(dir)
+		key := dir
+		if runtime.GOOS == "windows" {
+			key = strings.ToLower(key)
+		}
 		if dir == "." || seen[key] {
 			return
 		}
 		seen[key] = true
 		libraries = append(libraries, dir)
 	}
-	for _, root := range steamRoots() {
+	for _, root := range roots {
 		if _, err := os.Stat(root); err != nil {
 			continue
 		}
@@ -119,11 +164,27 @@ func libraryFolderPaths(vdf string) []string {
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		fields := quotedFields(scanner.Text())
-		if len(fields) == 2 && strings.EqualFold(fields[0], "path") {
-			paths = append(paths, strings.ReplaceAll(fields[1], `\\`, `\`))
+		if len(fields) != 2 {
+			continue
+		}
+		path := strings.ReplaceAll(fields[1], `\\`, `\`)
+		if strings.EqualFold(fields[0], "path") || (decimalKey(fields[0]) && filepath.IsAbs(path)) {
+			paths = append(paths, path)
 		}
 	}
 	return paths
+}
+
+func decimalKey(key string) bool {
+	if key == "" {
+		return false
+	}
+	for _, c := range key {
+		if c < '0' || c > '9' {
+			return false
+		}
+	}
+	return true
 }
 
 func quotedFields(line string) []string {

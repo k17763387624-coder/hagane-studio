@@ -538,11 +538,7 @@ func (c *client) start(path string, port int, stderr io.Writer) error {
 	if err != nil {
 		return err
 	}
-	name := "HaganeWorks"
-	if runtime.GOOS == "windows" {
-		name += ".exe"
-	}
-	program := filepath.Join(filepath.Dir(self), name)
+	program := desktopProgram(self, runtime.GOOS)
 	if _, err := os.Stat(program); err != nil {
 		return fmt.Errorf("Hagane Works is not running at %s/ and %s was not found to start it", c.base, program)
 	}
@@ -564,6 +560,26 @@ func (c *client) start(path string, port int, stderr io.Writer) error {
 		time.Sleep(200 * time.Millisecond)
 	}
 	return fmt.Errorf("started %s, but it did not answer at %s/ within %s (is another program using port %d?)", program, c.base, startWait, port)
+}
+
+func desktopProgram(self, platform string) string {
+	name := "HaganeWorks"
+	if platform == "windows" {
+		name += ".exe"
+	}
+	dir := filepath.Dir(self)
+	candidates := []string{filepath.Join(dir, name)}
+	if platform == "darwin" {
+		for _, bundle := range []string{"Hagane Works.app", "HaganeWorks.app"} {
+			candidates = append(candidates, filepath.Join(dir, bundle, "Contents", "MacOS", name))
+		}
+	}
+	for _, path := range candidates {
+		if info, err := os.Stat(path); err == nil && info.Mode().IsRegular() {
+			return path
+		}
+	}
+	return candidates[0]
 }
 
 func (c *client) get(path string, out any) error { return c.do("GET", path, nil, out) }

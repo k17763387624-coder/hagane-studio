@@ -15,7 +15,7 @@
   "successBody": "{count}개 주가 다시 온전해졌습니다. 해군 기지 {navalBases}개와 랜드마크 {landmarks}개가 돌아왔습니다.",
   "nothingToRestore": "다시 넣을 내용이 없습니다. 이 주들에는 본편의 내용이 이미 모두 들어 있습니다.",
   "errorVanillaRootUnconfigured": "Hearts of Iron IV 폴더가 설정되지 않아 본편의 주 파일을 읽지 못했고 아무것도 복원하지 못했습니다. 이번에는 한 줄도 변경되지 않았습니다. 설정 → Hearts of Iron IV 설치 폴더에서 게임 폴더를 선택하세요.",
-  "errorVanillaStatesDirMissing": "설정의 Hearts of Iron IV 폴더가 게임 설치 폴더가 아닙니다. history/states를 읽을 수 없었습니다. 이번에는 한 줄도 변경되지 않았습니다. 설정 → Hearts of Iron IV 설치 폴더에서 hoi4.exe가 있는 폴더를 선택하세요.",
+  "errorVanillaStatesDirMissing": "설정의 Hearts of Iron IV 폴더가 게임 설치 폴더가 아닙니다. history/states를 읽을 수 없었습니다. 이번에는 한 줄도 변경되지 않았습니다. 설정 → Hearts of Iron IV 설치 폴더에서 게임이 완전히 설치된 폴더를 선택하세요.",
   "errorVanillaStatesEmpty": "게임의 history/states 폴더는 찾았지만 그 안에서 주를 하나도 읽지 못했습니다. 이번에는 한 줄도 변경되지 않았습니다. Steam에서 게임 파일 무결성을 확인하거나 설정 → Hearts of Iron IV 설치 폴더에서 다른 설치 폴더를 선택하세요.",
   "errorGeneric": "본편 내용 복원에 실패해 이번에는 한 줄도 변경되지 않았습니다. 다시 시도할 수 있습니다."
 }

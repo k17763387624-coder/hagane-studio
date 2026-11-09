@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+	"io/fs"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -12,6 +13,41 @@ import (
 	"haganeworks/internal/cwtools"
 	"haganeworks/internal/settings"
 )
+
+func TestMacAppSelectionStoresAndReadsGameDataRoot(t *testing.T) {
+	a := newTestAPI(t)
+	root := writeSyntheticGame(t)
+	bundle := filepath.Join(root, "hoi4.app")
+	if err := os.MkdirAll(bundle, 0o755); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(root, "common", "example.txt"), []byte("data root"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	var status appStatus
+	if code := a.call("PUT", "/api/app/settings", map[string]any{"game_dir": bundle}, &status); code != http.StatusOK {
+		t.Fatalf("select app = %d", code)
+	}
+	if status.Settings.GameDir != root || status.Game == nil || status.Game.Dir != root {
+		t.Fatalf("selected game = %+v, want normalized root %s", status, root)
+	}
+	a.waitReady()
+	store, err := settings.Open(filepath.Join(filepath.Dir(a.dir), "settings.json"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := store.Update(func(s *settings.Settings) { s.GameDir = bundle }); err != nil {
+		t.Fatal(err)
+	}
+	legacy := app{Deps: Deps{Settings: store}}
+	game, err := legacy.game()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if raw, err := fs.ReadFile(game, "common/example.txt"); err != nil || string(raw) != "data root" {
+		t.Fatalf("read through old bundle setting = %q, %v", raw, err)
+	}
+}
 
 func TestReferenceTablesRoute(t *testing.T) {
 	a := newTestAPI(t)

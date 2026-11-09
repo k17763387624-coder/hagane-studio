@@ -15,7 +15,7 @@
   "successBody": "{count} estados vuelven a estar completos: han regresado {navalBases} bases navales y {landmarks} monumentos.",
   "nothingToRestore": "No hay nada que devolver: estos estados ya tienen todo lo que incluye el juego base.",
   "errorVanillaRootUnconfigured": "La carpeta de Hearts of Iron IV no está configurada, así que no se pudieron leer los archivos de estados del juego base ni restaurar nada. No se cambió ni una línea. Elige la carpeta del juego en Ajustes → Instalación de Hearts of Iron IV.",
-  "errorVanillaStatesDirMissing": "La carpeta de Hearts of Iron IV de los ajustes no es la carpeta de instalación del juego: no se pudo leer history/states. No se cambió ni una línea. Elige la carpeta que contiene hoi4.exe en Ajustes → Instalación de Hearts of Iron IV.",
+  "errorVanillaStatesDirMissing": "La carpeta de Hearts of Iron IV de los ajustes no es la carpeta de instalación del juego: no se pudo leer history/states. No se cambió ni una línea. Elige la carpeta de instalación completa del juego en Ajustes → Instalación de Hearts of Iron IV.",
   "errorVanillaStatesEmpty": "Se encontró la carpeta history/states del juego, pero no se pudo leer ni un solo estado. No se cambió ni una línea. Verifica los archivos del juego en Steam o elige otra instalación en Ajustes → Instalación de Hearts of Iron IV.",
   "errorGeneric": "No se pudo restaurar el contenido del juego base, así que no se cambió ni una línea. Puedes intentarlo de nuevo."
 }

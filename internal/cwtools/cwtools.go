@@ -8,6 +8,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"runtime"
 	"sort"
 	"strings"
 	"sync"
@@ -95,6 +96,12 @@ func CurrentStatus() Status {
 }
 
 func candidates(configured string) []string {
+	executable, _ := os.Executable()
+	wd, _ := os.Getwd()
+	return candidatePaths(configured, executable, wd, runtime.GOOS)
+}
+
+func candidatePaths(configured, executable, wd, platform string) []string {
 	var out []string
 	add := func(dir string) {
 		if dir == "" {
@@ -111,10 +118,14 @@ func candidates(configured string) []string {
 		out = append(out, dir)
 	}
 	add(configured)
-	if exe, err := os.Executable(); err == nil {
-		add(filepath.Join(filepath.Dir(exe), filepath.FromSlash(Folder)))
+	if executable != "" {
+		dir := filepath.Dir(executable)
+		add(filepath.Join(dir, filepath.FromSlash(Folder)))
+		if platform == "darwin" && filepath.Base(dir) == "MacOS" && filepath.Base(filepath.Dir(dir)) == "Contents" {
+			add(filepath.Join(filepath.Dir(dir), "Resources", filepath.FromSlash(Folder)))
+		}
 	}
-	if wd, err := os.Getwd(); err == nil {
+	if wd != "" {
 		add(filepath.Join(wd, filepath.FromSlash(Folder)))
 	}
 	return out
