@@ -62,6 +62,8 @@ jobs:
         run: go test ./...
 
   dependency-submission:
+    # Forks must opt in after enabling their repository's dependency graph.
+    if: github.repository == 'hagane-works/hagane-studio' || vars.ENABLE_DEPENDENCY_SUBMISSION == 'true'
     needs: go
     runs-on: ubuntu-latest
     permissions:
